@@ -1,0 +1,45 @@
+#include<iostream>
+#include<cmath>
+#include<cstdio>
+using namespace std;
+
+const double k_PI = acos(-1);
+
+inline double getAngle(double x,double y){
+	if(x==0){
+		if(y>0){
+			return 90.0;
+		}else{
+			return 270.0;
+		}
+	}
+	if(y==0){
+		if(x>0){
+			return 0.0;
+		}else{
+			return 180.0;
+		}
+	}
+  	double tmp = atan (y/x) * 180 / k_PI;
+  	if(x<0&&y<0) { tmp+= 180; }
+  	else if(x<0&&y>0) { tmp+=180; }
+  	else if(x>0&&y<0) { tmp += 360;}
+  	return tmp;
+}
+
+int main(){
+	int n;
+	double ax,ay,bx,by;
+	cin>>n;
+	double a,b;
+	for(int i=0;i!=n;++i){
+		cin>>ax>>ay>>bx>>by;
+		double tmp =abs(getAngle(ax,ay)-getAngle(bx,by));
+		if(tmp>180){
+			tmp = 360-tmp;
+		}
+		printf("%.2lf\n",tmp);
+	}
+
+	return 0;
+}
